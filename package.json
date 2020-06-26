@@ -1,0 +1,30 @@
+{
+  "devDependencies": {},
+  "name"           : "service-blog",
+  "version"        : "1.0.0",
+  "main"           : "index.js",
+  "license"        : "MIT",
+  "scripts"        : {
+    "start:client"  : "yarn --cwd client start",
+    "start:comments": "yarn --cwd comments start",
+    "start:eventBus": "yarn --cwd eventBus start",
+    "start:posts"   : "yarn --cwd posts start",
+    "start:query"   : "yarn --cwd query start",
+    "start:moderation"   : "yarn --cwd moderation start",
+    "start"         : "stmux -M -- [ \"yarn start:client\" :  \"yarn start:posts\" : \"yarn start:comments\" : \"yarn start:query\" : \"yarn start:moderation\" : \"yarn start:eventBus\" : \"sh\" ]",
+    "stop"          : "gulp kill"
+  },
+  "dependencies"   : {
+    "gulp" : "^4.0.2",
+    "stmux": "^1.8.0"
+  },
+  "private"        : true,
+  "workspaces"     : [
+    "client",
+    "comments",
+    "eventBus",
+    "posts",
+    "query",
+    "moderation"
+  ]
+}
