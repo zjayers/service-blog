@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventbus-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: eventbus
+  ports:
+    - name: eventbus
+      protocol: TCP
+      port: 4005
+      targetPort: 4005

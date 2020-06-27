@@ -1,0 +1,65 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infrastructure/k8s/deployments/*
+      - ./infrastructure/k8s/services/*
+build:
+  local:
+    push: false
+  artifacts:
+    # CLIENT
+    - image: zjayers/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    # COMMENTS
+    - image: zjayers/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    # EVENT BUS
+    - image: zjayers/eventbus
+      context: eventbus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    # MODERATION
+    - image: zjayers/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    # POSTS
+    - image: zjayers/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    # QUERY
+    - image: zjayers/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
